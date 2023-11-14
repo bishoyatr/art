@@ -24,6 +24,7 @@ class HistoryAlbums extends Migration
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
+        });
     }
 
     /**
@@ -33,6 +34,6 @@ class HistoryAlbums extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('history_albums');
     }
 }
