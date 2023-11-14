@@ -125,16 +125,44 @@ class DatabaseSeeder extends Seeder
             'created_by'=>1,
             'updated_by'=>1
         ]]);
-         $products_lines_data_type_1 = [
+         $current_data_type_0 = [
             [
-                'product_id' => 1,
-                'history_album_attachments'=>'1,1,1,1',
-                'current_pdf_attachment' => 2,
+                'product_line_id' => 1,
+                'current_description'=>'description',
+                'current_image_id' => 1,
+                'current_pdf_id' => 1,
+                'current_youtube_url' => 'www.youtube.com',
                 'is_active' => 1,
+                 'created_by'=>1,
+                'updated_by'=>1
             ],
             
         ];
-          DB::table('data_type_0')->insert($products_lines_data_type_1);
+          $history_data_type_0 = [
+            [
+                'product_id' => 1,
+                'history_title'=>'2019/2026',
+                'is_active' => 1,
+                 'created_by'=>1,
+                'updated_by'=>1
+            ],
+            
+        ];
+        $history_albums = [
+            [
+                'product_id' => 1,
+                'album_title'=>'2019',
+                'album_images_ids'=>'1,2,3',
+                'album_youtube_url'=>'www.youtube.com',
+                'is_active' => 1,
+                'created_by'=>1,
+                'updated_by'=>1
+            ],
+            
+        ];
+          DB::table('current_data_type_0')->insert($current_data_type_0);
+          DB::table('history_data_type_0')->insert($history_data_type_0);
+          DB::table('history_albums')->insert($history_albums);
     
     }
 }
