@@ -48,4 +48,33 @@ class Category extends BaseModel
                  })
             ->get();
     }
+
+    public function currentAttachmentCount()
+    {
+        return $this->hasManyThrough(
+            ProductLine::class,
+            Product::class,
+            'category_id', // Foreign key on the products table
+            'product_id',  // Foreign key on the product_lines table
+            'id',          // Local key on the categories table
+            'id'           // Local key on the products table
+        )->withCount('currentAttachment')
+            ->get()
+            ->sum('current_attachment_count');
+
+
+    }
+
+    public function historyAttachmentCount()
+    {
+        return $this->hasManyThrough(
+            ProductHistoryAttchment::class,
+            Product::class,
+            'category_id', // Foreign key on the products table...
+            'product_id',  // Foreign key on products_history_attachments table...
+            'id',          // Local key on the categories table...
+            'id'           // Local key on the products table...
+        )->count();
+
+    }
 }

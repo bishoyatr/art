@@ -13,6 +13,11 @@ class ProductLine extends BaseModel
     {
         $data = new ProductLineData($type);
         return $data::where('product_id',$this->id)->first();
-        
+
+    }
+
+    public function currentAttachment()
+    {
+     return $this->hasMany(CurrentProductLineAttatchment::class);
     }
 }

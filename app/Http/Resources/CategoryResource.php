@@ -29,6 +29,8 @@ class CategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'current_attachment_count' => $this->currentAttachmentCount(),
+            'history_attachment_count' => $this->historyAttachmentCount(),
         ];
     }
 }
