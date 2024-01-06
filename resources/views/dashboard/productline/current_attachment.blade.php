@@ -41,11 +41,13 @@
                     <div class="form-group">
                         <label for="exampleSelect1">image
                             <span class="text-danger">*</span></label>
-                           <input class="form-control" name="photo" type="file" id="example-date-input"/>
+                           <input class="form-control" name="photo[]" type="file" id="example-date-input" multiple/>
                          @error('photo')
                          <span class="text-danger">{{$message}}</span>
                          @enderror
-                        <img width="300px" height="300px" src="{{asset("assets/images/").'/'.$product_line->image}}"/>
+                        @foreach(\App\Http\Resources\ProductLineCurrentDataResource::getImageResource($product_line->image) as $image)
+                        <img width="300px" height="300px" src="{{$image}}"/>
+                        @endforeach
                   </div>
                     <div class="form-group">
                         <label for="exampleSelect1">pdf :

@@ -27,7 +27,7 @@ class UpdateAttatchmentRequest extends FormRequest
              'name' => 'required',
              'id' => 'required',
              'description' => 'required',
-             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5000',
+             'photo.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5000',
              'pdf_file' => 'nullable|mimes:pdf|max:10000',
              'youtube' => 'nullable',
              'instagram' => 'nullable',
