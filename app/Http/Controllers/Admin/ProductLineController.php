@@ -92,8 +92,8 @@ class ProductLineController extends Controller
            $category=CurrentProductLineAttatchment::findOrfail($request->id);
        if($request->has('photo'))
         {
-          $fileName = uploadImage('product_line', $request->photo);
-          $request->request->add(['image' => $fileName]);
+            $this->mapImage($request);
+
         }
         if($request->has('pdf_file'))
         {
@@ -107,8 +107,7 @@ class ProductLineController extends Controller
         $product_line=Product_line::findOrfail($request->product_line_id);
         if($request->has('photo'))
         {
-          $fileName = uploadImage('product_line', $request->photo);
-          $request->request->add(['image' => $fileName]);
+           $this->mapImage($request);
         }
         if($request->has('pdf_file'))
         {
@@ -129,8 +128,8 @@ class ProductLineController extends Controller
            $category=CurrentProductLineAttatchment::findOrfail($request->id);
        if($request->has('photo'))
         {
-          $fileName = uploadImage('product_line', $request->photo);
-          $request->request->add(['image' => $fileName]);
+            $this->mapImage($request);
+
         }
         if($request->has('pdf_file'))
         {
@@ -144,8 +143,8 @@ class ProductLineController extends Controller
         $product_line=Product_line::findOrfail($request->product_line_id);
         if($request->has('photo'))
         {
-          $fileName = uploadImage('product_line', $request->photo);
-          $request->request->add(['image' => $fileName]);
+            $this->mapImage($request);
+
         }
         if($request->has('pdf_file'))
         {
@@ -169,6 +168,19 @@ class ProductLineController extends Controller
         }
         return view('dashboard.productline.current_attachment')
                ->with(['product_lines'=>$product_line_attatchment,]);
+    }
+
+
+    private function mapImage($request)
+    {
+        $images=[];
+        foreach ($request->photo as $photo){
+            $fileName = uploadImage('product_line', $photo);
+            $request->request->add(['image' => $fileName]);
+            $images[]=$fileName;
+        }
+        $images=json_encode($images);
+        $request->request->add(['image' => $images]);
     }
 
 }
