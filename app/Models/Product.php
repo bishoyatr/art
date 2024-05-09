@@ -3,13 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\BaseModel;
-class Product extends BaseModel
+use Illuminate\Database\Eloquent\Model;
+
+class Product extends AbstractModel
 {
     use HasFactory;
+    protected $guarded=['id'];
 
-    public function productLines()
-    {
-        return $this->hasMany(ProductLine::class, 'product_id');
+    public function productCategory(){
+
+        return $this->hasMany(ProductCategories::class)->with('category')->orderBy('category_id');
     }
 }
