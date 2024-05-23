@@ -24,7 +24,7 @@ class LoginController extends Controller
     }
     public function login(Request $request)
     {
- 
+
         $validation=ProductsService::loginValidation($request);
 
         if (count($validation->errors()))
@@ -42,7 +42,7 @@ class LoginController extends Controller
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data); // Set the POST data
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         $res = curl_exec($ch) ;
-     
+
         if ($res === false) {
          return ProductsService::ErrorResponse("server error");
         }
@@ -68,6 +68,8 @@ class LoginController extends Controller
                             [
                                 'token'=>$user->remember_token,
                                 'name'=>$user->name,
+                                'is_active'=>$user->is_active,
+                                'pdf_allowed'=>$user->pdf_allowed,
                                 'image'=>asset("assets/images/").'/'.$user->avatar,
                                 "upload_apple_version"=>'true'
                             ];
@@ -81,6 +83,8 @@ class LoginController extends Controller
                 [
                     'token'=>$user->remember_token,
                     'name'=>$user->name,
+                    'is_active'=>$user->is_active,
+                    'pdf_allowed'=>$user->pdf_allowed,
                     'image'=>asset("assets/images/").'/'.$user->avatar,
                     "upload_apple_version"=>'true'
                 ];
