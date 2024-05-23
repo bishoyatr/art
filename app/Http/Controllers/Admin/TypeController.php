@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
@@ -9,21 +10,21 @@ class TypeController extends Controller
 {
     public function index()
     {
-        $categories = Type::whereNull('parent_id')->get();
-        return view('dashboard.category.category')->with(['categories'=>$categories]);
+        $categories = Type::all();
+        return view('dashboard.type.type')->with(['categories'=>$categories]);
     }
 
     public function create()
     {
-        return view('dashboard.category.create');
+        return view('dashboard.type.create');
     }
 
-    public function store( $request)
+    public function store(Request $request)
     {
 
         Type::create($request->except('_token'));
 
-        return redirect()->route('category.index')->with(['success' => 'Type is added successfully']);
+        return redirect()->route('types.index')->with(['success' => 'Type is added successfully']);
     }
 
 
@@ -39,14 +40,14 @@ class TypeController extends Controller
         return view('dashboard.type.edit')->with(['category'=>$category]);
     }
 
-    public function update($category_id, $request)
+    public function update($category_id,Request $request)
     {
 
         $category=Type::findOrfail($category_id);
         $category->update($request->except('_token'));
 
 
-        return redirect()->route('category.index')->with('success', 'Type updated successfully');
+        return redirect()->route('types.index')->with('success', 'Type updated successfully');
     }
 
     public function destroy($category_id)
