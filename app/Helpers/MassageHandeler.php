@@ -15,7 +15,7 @@ class MassageHandeler
         return self::responseJson($status, $msg, $data);
     }
 
-    private function responseJson($status, $msg, $data)
+    private static function responseJson($status, $msg, $data)
     {
         switch ($status) {
             case 200:
