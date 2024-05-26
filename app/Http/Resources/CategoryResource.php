@@ -7,30 +7,14 @@ class CategoryResource extends JsonResource
 {
     public function toArray($request)
     {
-    if(isset($_GET['b']))
-    {
-        $current_total = 0 ;
-        $history_total = 0 ;
-        $products = $this->products ;
-        if(!empty($$products)) {
-        foreach($products as $p)
-        {
-            $lines = $p->productLines ;
-            dd($lines);
-             if(!empty($lines)) {
-            foreach($lines as $line)
-            {
-                dd($line->current);
-            }
-        }
-        }
-        }
-    }
+        $count_products_stats = $this->count_products_stats() ;
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'current_attachment_count' => $this->currentAttachmentCount(),
-            'history_attachment_count' => $this->historyAttachmentCount(),
+           // 'current_attachment_count' => $this->currentAttachmentCount(),
+            //'history_attachment_count' => $this->historyAttachmentCount(),
+            'current_attachment_count' => $count_products_stats['current_attachment_count'],
+            'history_attachment_count' => $count_products_stats['history_attachment_count'],
         ];
     }
 }

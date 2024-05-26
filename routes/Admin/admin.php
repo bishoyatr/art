@@ -17,24 +17,6 @@ Route::group([ 'prefix' => 'category','middleware' => 'auth:admin'], function ()
     Route::get('/delete/{id}', 'CategoryController@destroy')->name('category.destroy'); // the first page admin
 
 });
-Route::group([ 'prefix' => 'types','middleware' => 'auth:admin'], function () {
-    Route::get('/', 'TypeController@index')->name('types.index'); // the first page admin visit
-    Route::get('/create', 'TypeController@create')->name('types.create'); // the first page admin visit
-    Route::post('/store', 'TypeController@store')->name('types.store'); // the first page admin visit
-    Route::get('/edit/{id}', 'TypeController@edit')->name('types.edit'); // the first page admin visit
-    Route::post('/update/{id}', 'TypeController@update')->name('types.update'); // the first page admin
-    Route::get('/delete/{id}', 'TypeController@destroy')->name('types.destroy'); // the first page admin
-
-});
-Route::group([ 'prefix' => 'users','middleware' => 'auth:admin'], function () {
-    Route::get('/', 'UserController@index')->name('users.index'); // the first page admin visit
-    Route::get('/create', 'UserController@create')->name('users.create'); // the first page admin visit
-    Route::post('/store', 'UserController@store')->name('users.store'); // the first page admin visit
-    Route::get('/edit/{id}', 'UserController@edit')->name('users.edit'); // the first page admin visit
-    Route::post('/update/{id}', 'UserController@update')->name('users.update'); // the first page admin
-    Route::get('/delete/{id}', 'UserController@destroy')->name('users.destroy'); // the first page admin
-
-});
 Route::group([ 'prefix' => 'subcategory','middleware' => 'auth:admin'], function () {
     Route::get('/index/{cat_id}', 'SubCategoryController@index')->name('subcategory.index');
 

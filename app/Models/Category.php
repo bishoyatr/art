@@ -77,4 +77,22 @@ class Category extends BaseModel
         )->count();
 
     }
+    public function count_products_stats()
+    {
+        $currnet = 0 ;
+        $history = 0 ;
+        $products = $this->products ;
+     
+        foreach ($products as $key => $p) {
+            if($p->packaging_status === 0) $history++;
+            if($p->packaging_status === 1) $currnet++;
+            if($p->packaging_status === NULL) 
+            {
+                $history++;
+                $currnet++;
+            }
+         
+        }
+        return ['current_attachment_count' => $currnet ,'history_attachment_count'=> $history];
+    }
 }

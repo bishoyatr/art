@@ -21,12 +21,6 @@ Route::group(['prefix'=>'categories','middleware' => 'apiAuth'], function ()
     {
         Route::get('/index', 'CategoriesController@index');
     });
-
-Route::group(['prefix'=>'types','middleware' => 'apiAuth'], function ()
-{
-    Route::get('/index', 'TypeController@index');
-});
-
 Route::group(['prefix'=>'subcategories','middleware' => 'apiAuth'], function ()
    {
         Route::get('/index', 'SubCategoriesController@index');

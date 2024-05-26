@@ -25,9 +25,9 @@ class CurrentAttatchmentRequest extends FormRequest
     {
           return [
              'name' => 'required',
-             'description' => 'required',
+             'description' => 'nullable',
              'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20000',
-             'pdf_file' => 'required|mimes:pdf|max:200000',
+             'pdf_file' => 'nullable|mimes:pdf|max:200000',
              'youtube' => 'nullable',
              'instagram' => 'nullable',
              'facebook' => 'nullable',
