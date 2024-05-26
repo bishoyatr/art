@@ -17,11 +17,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'status',
-        'avatar',
-        'password',
+    protected $guarded = [
+        'id'
     ];
 
     /**
@@ -41,6 +38,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+//        'is_active' => 'boolean',
+//        'pdf_allowed' => 'boolean',
     ];
     public function isAdmin()
     {

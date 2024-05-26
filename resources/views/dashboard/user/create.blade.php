@@ -9,7 +9,7 @@
                 <h3 class="card-title">create category</h3>
             </div>
             <!--begin::Form-->
-            <form method="post" action="{{route('category.store')}}">
+            <form method="post" action="{{route('users.store')}}">
                 <div class="card-body">
                   <div class="form-group">
                         <label for="exampleSelect1">name
@@ -19,32 +19,35 @@
                          <span class="text-danger">{{$message}}</span>
                          @enderror
                   </div>
+                    <input name="avatar" value="product_line/default.png" hidden="">
+
                     <div class="form-group">
-                        <label for="exampleSelect1">status
+                        <label for="exampleSelect1">password
                             <span class="text-danger">*</span></label>
-                        <select name="is_active" class="form-control" id="exampleSelect1">
-                            <option @if(old('is_active')==1) selected @endif value="1">active</option>
-                            <option @if(old('is_active')==0)selected @endif value="0">disable</option>
-                        </select>
+                        <input class="form-control" name="password" type="text"  id="example-date-input"/>
+                        @error('password')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
                     </div>
-                      @error('is_active')
-                         <span class="text-danger">{{$message}}</span>
-                         @enderror
-                        <div class="form-group">
-                        <label for="exampleSelect1">category type
+
+                    <div class="form-group">
+                        <label for="exampleSelect1">is Active
                             <span class="text-danger">*</span></label>
-                        <select name="category_type" class="form-control" id="exampleSelect1">
-                            @foreach(\App\Models\Type::all() as $item)
-                                <option @if(old('category_type')=== $item->id) selected @endif value="{{$item->id}}">{{$item->name}}</option>
-                            @endforeach
-{{--                            <option @if(old('category_type')===1) selected @endif value="1">packaging</option>--}}
-{{--                            <option @if(old('category_type')===0)selected @endif value="0">visibility</option>--}}
-                            <option value="">all</option>
-                        </select>
-                             @error('category_type')
-                         <span class="text-danger">{{$message}}</span>
-                         @enderror
+                        <input class="form-control" name="is_active" type="checkbox" value=1  id="example-date-input"/>
+                        @error('is_active')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
                     </div>
+
+                    <div class="form-group">
+                        <label for="exampleSelect1">pdf allowed
+                            <span class="text-danger">*</span></label>
+                        <input class="form-control" name="pdf_allowed" type="checkbox"  value=1 id="example-date-input"/>
+                        @error('pdf_allowed')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
+                    </div>
+
               @csrf
 
 
