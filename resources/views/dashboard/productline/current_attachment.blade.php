@@ -46,7 +46,7 @@
                          <span class="text-danger">{{$message}}</span>
                          @enderror
                         @foreach(\App\Http\Resources\ProductLineCurrentDataResource::getImageResource($product_line->image) as $image)
-                        <img width="300px" height="300px" src="{{$image}}"/>
+                        <img width="300px" height="300px" src="{{$image['image']}}"/>
                         @endforeach
                   </div>
                     <div class="form-group">
