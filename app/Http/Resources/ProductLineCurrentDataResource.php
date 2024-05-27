@@ -14,10 +14,15 @@ class ProductLineCurrentDataResource extends JsonResource
      */
     public function toArray($request)
     {
+         $images = self::getImageResource($this->image);
+         $image = $images[0];
             return [
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+             'image' =>$images,
+             'single_image' =>$image,
+
             'image' =>self::getImageResource($this->image),
             'pdf' => asset("assets/images/").'/'.$this->pdf,
             'youtube' => $this->youtube ?? '' ,
@@ -32,7 +37,7 @@ class ProductLineCurrentDataResource extends JsonResource
         $alpoum=[];
 
         if (is_null(json_decode($images)))
-             $alpoum[]= ['image'=>$images];
+                $alpoum[]= asset("assets/images/") . '/' . $images;
 
         else {
             foreach (json_decode($images) as $key => $image) {
