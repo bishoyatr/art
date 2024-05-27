@@ -46,6 +46,9 @@
                          <span class="text-danger">{{$message}}</span>
                          @enderror
                         @foreach(\App\Http\Resources\ProductLineCurrentDataResource::getImageResource($product_line->image) as $image)
+                        @php
+                        if(is_array($image))$image=$image['image'];
+                        @endphp
                         <img width="300px" height="300px" src="{{$image}}"/>
                         @endforeach
                   </div>
