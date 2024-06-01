@@ -38,4 +38,9 @@ class Product extends BaseModel
                  })
              ->get();
     }
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class,'product_status');
+    }
 }
