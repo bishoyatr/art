@@ -46,20 +46,33 @@
                 </span>
                  @endif
             </td>
-            <td>
-                @if($product->type===1)
-                <span class="label label-inline label-light-success font-weight-bold">
-                    packaging
-                </span>
-                @elseif($product->type===0)
-                <span class="label label-inline label-light-warning font-weight-bold">
-                    visibility
-                </span>
-                @elseif($product->type==null)
-                    <span class="label label-inline label-light-info font-weight-bold">
-                    packaging&visibility
-                </span>
-                 @endif
+                 <td>
+                     @php
+                         $type = \App\Models\Type::find($product->type);
+                     @endphp
+                     @if($type)
+                         <span class="label label-inline label-light-success font-weight-bold">
+                                        {{$type->name}}
+                                    </span>
+                     @else
+                         <span class="label label-inline label-light-info font-weight-bold">
+                                            All
+                                        </span>
+                     @endif
+{{--            <td>--}}
+{{--                @if($product->type===1)--}}
+{{--                <span class="label label-inline label-light-success font-weight-bold">--}}
+{{--                    packaging--}}
+{{--                </span>--}}
+{{--                @elseif($product->type===0)--}}
+{{--                <span class="label label-inline label-light-warning font-weight-bold">--}}
+{{--                    visibility--}}
+{{--                </span>--}}
+{{--                @elseif($product->type==null)--}}
+{{--                    <span class="label label-inline label-light-info font-weight-bold">--}}
+{{--                    packaging&visibility--}}
+{{--                </span>--}}
+{{--                 @endif--}}
             </td>
             <td><a href="{{route('history.edit_history_attachment',$product->id )}}" type="button"
                    class="btn

@@ -16,7 +16,7 @@
 @endif
 <table  class="table table-hover pt-0 mt-0" >
          <?php
-        
+
          if($products->isEmpty()){  ?>  <a href="{{route('history.create',$product_id)}}" type="button" class="btn btn-info">create </a> <?php }  ?>
 
     <thead>
@@ -49,19 +49,31 @@
                  @endif
             </td>
             <td>
-                @if($product->type===1)
-                <span class="label label-inline label-light-success font-weight-bold">
-                    packaging
-                </span>
-                @elseif($product->type===0)
-                <span class="label label-inline label-light-warning font-weight-bold">
-                    visibility
-                </span>
-                @elseif($product->type==null)
-                    <span class="label label-inline label-light-info font-weight-bold">
-                    packaging&visibility
-                </span>
-                 @endif
+                     @php
+                         $type = \App\Models\Type::find($product->type);
+                     @endphp
+                     @if($type)
+                         <span class="label label-inline label-light-success font-weight-bold">
+                                        {{$type->name}}
+                                    </span>
+                     @else
+                         <span class="label label-inline label-light-info font-weight-bold">
+                                            All
+                                        </span>
+                     @endif
+{{--                @if($product->type===1)--}}
+{{--                <span class="label label-inline label-light-success font-weight-bold">--}}
+{{--                    packaging--}}
+{{--                </span>--}}
+{{--                @elseif($product->type===0)--}}
+{{--                <span class="label label-inline label-light-warning font-weight-bold">--}}
+{{--                    visibility--}}
+{{--                </span>--}}
+{{--                @elseif($product->type==null)--}}
+{{--                    <span class="label label-inline label-light-info font-weight-bold">--}}
+{{--                    packaging&visibility--}}
+{{--                </span>--}}
+{{--                 @endif--}}
             </td>
             <td><a href="{{route('history.add_history_attachment',[$product->product_id,$product->type] )}}" type="button"
                    class="btn

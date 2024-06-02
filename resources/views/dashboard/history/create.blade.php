@@ -44,8 +44,11 @@
                         <label for="exampleSelect1">category type
                             <span class="text-danger">*</span></label>
                         <select name="type" class="form-control" id="exampleSelect1">
-                            <option @if($product && $product->product_status===1) selected @endif value="1">packaging</option>
-                            <option @if($product &&  $product->product_status===0)selected @endif value="0">visibility</option>
+                            @foreach(\App\Models\Type::all() as $item)
+                                <option @if(old('product_status')=== $item->id) selected @endif value="{{$item->id}}">{{$item->name}}</option>
+                            @endforeach
+{{--                            <option @if($product && $product->product_status===1) selected @endif value="1">packaging</option>--}}
+{{--                            <option @if($product &&  $product->product_status===0)selected @endif value="0">visibility</option>--}}
                         </select>
                          @error('type')
                          <span class="text-danger">{{$message}}</span>
