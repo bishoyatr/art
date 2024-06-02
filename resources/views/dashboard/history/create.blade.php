@@ -15,7 +15,7 @@
                       <input class="form-control" name="product_id" type="hidden" value="{{$product_id}}" id="example-date-input"/>
                         <label for="exampleSelect1">year title
                             <span class="text-danger">*</span></label>
-                        <input class="form-control" name="title" type="text" value="{{$product->name ? $product->name : old('title') }}"
+                        <input class="form-control" name="title" type="text" value="{{$product ? $product->name : old('title') }}"
                                id="example-date-input"/>
                          @error('title')
                          <span class="text-danger">{{$message}}</span>
@@ -44,8 +44,8 @@
                         <label for="exampleSelect1">category type
                             <span class="text-danger">*</span></label>
                         <select name="type" class="form-control" id="exampleSelect1">
-                            <option @if($product->product_status===1) selected @endif value="1">packaging</option>
-                            <option @if($product->product_status===0)selected @endif value="0">visibility</option>
+                            <option @if($product && $product->product_status===1) selected @endif value="1">packaging</option>
+                            <option @if($product &&  $product->product_status===0)selected @endif value="0">visibility</option>
                         </select>
                          @error('type')
                          <span class="text-danger">{{$message}}</span>

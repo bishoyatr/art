@@ -44,15 +44,9 @@
                         <label for="exampleSelect1">category type
                             <span class="text-danger">*</span></label>
                         <select name="category_type" class="form-control" id="exampleSelect1">
-{{--                            @if($categories->category_type===1)--}}
-                            <option selected  value="{{$categories->category_type}}">{{$categories->type?->name}}</option>
-{{--                            @endif--}}
-{{--                            @if($categories->category_type===0)--}}
-{{--                            <option selected  value="2">visibility</option>--}}
-{{--                            @endif--}}
-{{--                                @if($categories->category_type===null)--}}
-{{--                            <option  selected value="">packaging&visibility</option>--}}
-{{--                                @endif--}}
+
+                            <option selected  value="{{$categories->category_type}}">{{ isset($categories->type)? $categories->type->name :''}}</option>
+
                         </select>
                              @error('category_type')
                          <span class="text-danger">{{$message}}</span>

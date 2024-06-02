@@ -20,7 +20,6 @@ class ProductController extends Controller
     {
 
       $categories = Category::select('id','name','category_type')->where('id',$cat_id)->whereNotNull('parent_id')->first();
-
         return view('dashboard.product.create')->with(['categories'=>$categories]);
     }
 
