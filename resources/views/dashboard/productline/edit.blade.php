@@ -44,13 +44,19 @@
                         <div class="form-group">
                         <label for="exampleSelect1">product line type
                             <span class="text-danger">*</span></label>
+
                         <select name="product_line_status" class="form-control" id="exampleSelect1">
-                            <option @if($product_line->product_line_status===1) selected @endif
-                            value="1">packaging</option>
-                            <option @if($product_line->product_line_status===0)selected @endif
-                            value="0">visibility</option>
-                            <option @if($product_line->product_line_status===null)selected @endif
-                                                                                       value="">packaging&visibility</option>
+                            @foreach(\App\Models\Type::all() as $item)
+                                <option @if($product_line->product_line_status===$item->id) selected @endif value="{{$item->id}}">
+                                    {{$item->name}}</option>
+                            @endforeach
+
+{{--                            <option @if($product_line->product_line_status===1) selected @endif--}}
+{{--                            value="1">packaging</option>--}}
+{{--                            <option @if($product_line->product_line_status===0)selected @endif--}}
+{{--                            value="0">visibility</option>--}}
+{{--                            <option @if($product_line->product_line_status===null)selected @endif--}}
+{{--                                                                                       value="">packaging&visibility</option>--}}
                         </select>
                              @error('product_line_status')
                          <span class="text-danger">{{$message}}</span>

@@ -48,20 +48,19 @@
                 </span>
                  @endif
             </td>
-            <td>
-                @if($products_line->product_line_status===1)
-                <span class="label label-inline label-light-success font-weight-bold">
-                    packaging
-                </span>
-                @elseif($products_line->product_line_status===0)
-                <span class="label label-inline label-light-warning font-weight-bold">
-                    visibility
-                </span>
-                @elseif($products_line->product_line_status==null)
-                    <span class="label label-inline label-light-info font-weight-bold">
-                    packaging&visibility
-                </span>
-                 @endif
+                 <td>
+                     @php
+                         $type = \App\Models\Type::find($products_line->product_line_status);
+                     @endphp
+                     @if($type)
+                         <span class="label label-inline label-light-success font-weight-bold">
+                                        {{$type->name}}
+                                    </span>
+                     @else
+                         <span class="label label-inline label-light-info font-weight-bold">
+                                            All
+                                        </span>
+                     @endif
             </td>
 
             <td><a href="{{route('productline.add_attachment',$products_line->id)}}" type="button" class="btn btn-success">add

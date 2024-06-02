@@ -23,8 +23,8 @@
                         <label for="exampleSelect1">category
                             <span class="text-danger">*</span></label>
                         <select name="category_id" class="form-control" id="exampleSelect1">
-                               <option @if(old('category_id')==$categories->id) selected @endif
-                               value="{{$categories->id}}">{{$categories->name}}</option>
+                               <option @if(old('category_id')==$categories?->id) selected @endif
+                               value="{{$categories?->id}}">{{$categories?->name}}</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -43,15 +43,18 @@
                         <label for="exampleSelect1">category type
                             <span class="text-danger">*</span></label>
                         <select name="product_status" class="form-control" id="exampleSelect1">
-                            @if($categories->category_type == 1)
-                            <option  selected  value="1">packaging</option>
-                            @endif
-                            @if($categories->category_type===0)
-                            <option selected value="0">visibility</option>
-                            @endif
-                            @if($categories->category_type===null)
-                            <option selected value="">packaging&visibility</option>
-                            @endif
+                            @foreach(\App\Models\Type::all() as $item)
+                                <option @if(old('category_type')=== $item->id) selected @endif value="{{$item->id}}">{{$item->name}}</option>
+                            @endforeach
+                            {{--                            @if($categories->category_type == 1)--}}
+{{--                            <option  selected  value="1">packaging</option>--}}
+{{--                            @endif--}}
+{{--                            @if($categories->category_type===0)--}}
+{{--                            <option selected value="0">visibility</option>--}}
+{{--                            @endif--}}
+{{--                            @if($categories->category_type===null)--}}
+{{--                            <option selected value="">packaging&visibility</option>--}}
+{{--                            @endif--}}
                         </select>
                          @error('product_status')
                          <span class="text-danger">{{$message}}</span>

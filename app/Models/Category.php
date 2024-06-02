@@ -77,4 +77,9 @@ class Category extends BaseModel
         )->count();
 
     }
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class,'category_type');
+    }
 }

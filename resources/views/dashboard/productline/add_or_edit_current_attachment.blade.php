@@ -95,8 +95,11 @@
                         <label for="exampleSelect1">attachment type
                             <span class="text-danger">*</span></label>
                         <select name="product_line_attachment_status" class="form-control" id="exampleSelect1">
-                            <option @if(old('product_line_attachment_status')==1) selected @endif value="1">packaging</option>
-                            <option @if(old('product_line_attachment_status')==0)selected @endif value="0">visibility</option>
+                            @foreach(\App\Models\Type::all() as $item)
+                                <option @if(old('product_line_attachment_status')=== $item->id) selected @endif value="{{$item->id}}">{{$item->name}}</option>
+                            @endforeach
+{{--                            <option @if(old('product_line_attachment_status')==1) selected @endif value="1">packaging</option>--}}
+{{--                            <option @if(old('product_line_attachment_status')==0)selected @endif value="0">visibility</option>--}}
                         </select>
                              @error('product_line_attachment_status')
                          <span class="text-danger">{{$message}}</span>

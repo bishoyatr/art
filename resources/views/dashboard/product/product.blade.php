@@ -49,20 +49,19 @@
                 </span>
                  @endif
             </td>
-            <td>
-                @if($product->product_status===1)
-                <span class="label label-inline label-light-success font-weight-bold">
-                    packaging
-                </span>
-                @elseif($product->product_status===0)
-                <span class="label label-inline label-light-warning font-weight-bold">
-                    visibility
-                </span>
-                @elseif($product->product_status==null)
-                    <span class="label label-inline label-light-info font-weight-bold">
-                    packaging&visibility
-                </span>
-                 @endif
+                 <td>
+                     @php
+                         $type = \App\Models\Type::find($product->product_status);
+                     @endphp
+                     @if($type)
+                         <span class="label label-inline label-light-success font-weight-bold">
+                                        {{$type->name}}
+                                    </span>
+                     @else
+                         <span class="label label-inline label-light-info font-weight-bold">
+                                            All
+                                        </span>
+                     @endif
             </td>
             <td>
                 @if($product->packaging_status===1)

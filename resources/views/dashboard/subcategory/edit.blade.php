@@ -46,10 +46,15 @@
                         <label for="exampleSelect1">category type
                             <span class="text-danger">*</span></label>
                         <select name="category_type" class="form-control" id="exampleSelect1">
-                            <option @if($category->category_type===1) selected @endif value="1">packaging</option>
-                            <option @if($category->category_type===0)selected @endif value="0">visibility</option>
-                            <option @if($category->category_type===null)selected @endif
-                            value="">packaging&visibility</option>
+                            @foreach(\App\Models\Type::all() as $item)
+                                <option @if($category->category_type===$item->id) selected @endif value="{{$item->id}}">
+                                    {{$item->name}}</option>
+                            @endforeach
+
+                            {{--                            <option @if($category->category_type===1) selected @endif value="1">packaging</option>--}}
+{{--                            <option @if($category->category_type===0)selected @endif value="0">visibility</option>--}}
+{{--                            <option @if($category->category_type===null)selected @endif--}}
+{{--                            value="">packaging&visibility</option>--}}
                         </select>
                              @error('category_type')
                          <span class="text-danger">{{$message}}</span>
