@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\ProductsService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -22,6 +23,9 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
+        if (!$this->isUser($request->input('name'),$request->input('password')))
+            return redirect()->route('users.index')->with(['error' => 'This User Not Exist In Atr DataBase']);
+
         $req = $request->except('_token');
 
         $req['is_active'] = ($request->has('is_active') && $request->is_active == "1")?1:0;
@@ -31,6 +35,33 @@ class UserController extends Controller
         $user->remember_token = $tokenStr->token;
         $user->save();
         return redirect()->route('users.index')->with(['success' => 'User is added successfully']);
+    }
+
+    private function isUser($username,$password){
+
+        $apiEndpoint = 'https://sales.atr-eg.com/api/auth_user_for_art.php';
+        $post_data= array(
+            'user_name' => $username,
+            "user_password"=>$password
+        );
+        $ch = curl_init($apiEndpoint);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return the response as a string instead of outputting it directly
+        curl_setopt($ch, CURLOPT_POST, true); // Set the request method to POST
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data); // Set the POST data
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $res = curl_exec($ch) ;
+
+        if ($res === false) {
+            return false;
+        }
+        $response = json_decode($res);
+        if(isset($response->status) && $response->status=="success")
+        {
+            return true;
+        }
+
+        return false;
+
     }
 
 
