@@ -17,55 +17,54 @@ use App\Http\Controllers\Api\LoginController;
 |
 */
 
-// Route::get('/categories', 'otherApiController@test');
 
-Route::get('ok',function(){
-     return ' Hello';
-});
+// Route::get('ok',function(){
+//      return ' Hello';
+// });
 
 Route::post('/log', [LoginController::class, 'log'])->name('log');
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+     return $request->user();
 });
 
 Route::group(['prefix'=>'categories','middleware' => 'apiAuth'], function ()
 {
-         Route::get('/index', 'CategoriesController@index');
-    });
+     Route::get('/index', 'CategoriesController@index');
+});
 
 Route::group(['prefix'=>'types','middleware' => 'apiAuth'], function ()
 {
-    Route::get('/index', 'TypeController@index');
+     Route::get('/index', 'TypeController@index');
 });
 
 Route::group(['prefix'=>'subcategories','middleware' => 'apiAuth'], function ()
-   {
-        Route::get('/index', 'SubCategoriesController@index');
-   });
+{
+     Route::get('/index', 'SubCategoriesController@index');
+});
 
 Route::group(['prefix'=>'products'], function ()
 {
      Route::get('/index', 'ProductController@index');
      Route::get('/history', 'ProductHistoryController@index');
-
+     
 });
 
 Route::group(['prefix'=>'products_line','middleware' => 'apiAuth'], function ()
-   {
-        Route::get('/index', 'ProductLineController@index');
-        Route::get('/current_product_attachment', 'ProductLineController@CurrentProductAttachment');
-   });
+{
+     Route::get('/index', 'ProductLineController@index');
+     Route::get('/current_product_attachment', 'ProductLineController@CurrentProductAttachment');
+});
 
 Route::group(['prefix'=>'user','middleware' => 'apiAuth'], function ()
-   {
-        Route::post('/update', 'LoginController@updateImage');
-
-   });
+{
+     Route::post('/update', 'LoginController@updateImage');
+     
+});
 Route::group(['prefix'=>'login'], function ()
-   {
-        Route::post('/', 'LoginController@login');
-
-   });
+{
+     Route::post('/', 'LoginController@login');
+     
+});
 
 // ------------------------------------------------
 
@@ -74,7 +73,16 @@ Route::group(['prefix'=>'login'], function ()
 //get other old attachment
 //get other current attachment
 
-// Route::group(['prefix'=>'old'], function ()
-// {
-// });
+Route::group(['prefix'=>'/2'], function ()
+{
+     Route::get('/categories/{id}', [otherApiController::class, 'showOtherCategories']);
+     Route::get('/old/{id}', [otherApiController::class, 'showAllOldAttachments']);
+     Route::get('/old/single/{id}', [otherApiController::class, 'showSingleCurrentAttachment']);
+     Route::get('/current/{id}', [otherApiController::class, 'showAllCurrentAttachments']);
+     Route::get('/current/single/{id}', [otherApiController::class, 'showSingleCurrentAttachment']);
 
+     Route::post('/notification/send',[otherApiController::class,'createNotification']);
+     Route::get('/notifications',[otherApiController::class,'getNotifications']);
+});
+     
+     
