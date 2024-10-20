@@ -64,20 +64,5 @@ class otherApiController extends Controller
         $images=json_decode($history->images);
         return response()->json($this->handleResponse('sucess',200,'sucess',$history),200);
     }
-    public function getNotifications()
-    {
-        $notifications = notification::all();
-        return response()->json($this->handleResponse('sucess',200,'sucess',$notifications),200);
-    }
-    public function createNotification(Request $request){
-        $create = notification::create([
-            'name'=>$request->name,
-            'description'=>$request->description,
-            'created_by'=>1
-        ]);
-        return response()->json($this->handleResponse('sucess',201,'Notification Sent',$create),201);
-    }
-    public function sendMessage(Request $request){
 
-    }
 }

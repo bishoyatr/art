@@ -41,6 +41,12 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+        'notifications' => [
+            'driver' => 'local',
+            'root' => storage_path('assets/images/notifications'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
              'product_line' => [
             'driver' => 'local',
             'root' => public_path('assets/images/product_line'),

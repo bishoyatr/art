@@ -1,12 +1,15 @@
 <?php
 
+use App\Http\Controllers\notificationsController;
 use App\Http\Controllers\otherTypesAttachmentsController;
 use App\Http\Controllers\otherTypesController;
 use App\Http\Controllers\otherTypesSubCategoriesController;
 use Illuminate\Support\Facades\Route;
 
-
-
+Route::group(['prefix' => 'notifications','middleware' => 'auth:admin'], function () {
+Route::get('/send',[notificationsController::class, 'notificationsView'])->name('notifications.index') ;
+Route::post('/store',[notificationsController::class, 'createNotification'])->name('notification.send');
+});
 
 
 Route::group(['middleware' => 'auth:admin'], function () {

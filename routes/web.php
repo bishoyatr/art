@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\notificationsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -19,3 +20,5 @@ Route::middleware(['admin'])->group(function () {
     Route::resource('categories', CategoryController::class);
 
 });
+
+

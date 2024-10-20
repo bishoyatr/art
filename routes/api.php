@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\notificationsController;
 use App\Http\Controllers\otherApiController;
 use App\Http\Controllers\otherTypesController;
+use App\Http\Controllers\SendMailController;
 use App\Models\OtherCategories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -84,5 +86,13 @@ Route::group(['prefix'=>'/2'], function ()
      Route::post('/notification/send',[otherApiController::class,'createNotification']);
      Route::get('/notifications',[otherApiController::class,'getNotifications']);
 });
+
+Route::group(['prefix'=>'notifications'], function ()
+{
+     Route::get('/',[notificationsController::class, 'getNotifications'])->name('notifications.all') ;
+});
+
+
      
      
+Route::post('/mail',[SendMailController::class,'store']);

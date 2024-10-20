@@ -12,6 +12,7 @@ class notification extends Model
     protected $fillable = [
         'name',
         'description',
+        'image',
         'created_by'
     ];
 }
