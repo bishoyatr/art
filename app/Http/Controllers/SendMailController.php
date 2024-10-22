@@ -15,19 +15,38 @@ class SendMailController extends Controller
         try {
     
             /* Email SMTP Settings */
-            $mail->SMTPDebug = 0;
-            $mail->isSMTP();
+            $mail->isSMTP();                                      
+            $mail->SMTPDebug = 1;  
+            // $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'ssl';
             $mail->Host = env('MAIL_HOST');
-            $mail->SMTPAuth = true;
             $mail->Username = env('MAIL_USERNAME');
             $mail->Password = env('MAIL_PASSWORD');
-            $mail->SMTPSecure = env('MAIL_ENCRYPTION');
-            $mail->Port = env('MAIL_PORT');
-    
+            $mail->Port = 587;
             $mail->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
             $mail->addAddress($request->email);
     
             $mail->isHTML(true);
+            
+            
+            
+            
+            // $mail->isSMTP();
+            // $mail->isSMTP();
+            // $mail->SMTPAuth = true;
+            // $mail->SMTPSecure = env('MAIL_ENCRYPTION');
+            //$mail->Port = env('MAIL_PORT');
+            // $mail->SMTPAuth = false;
+            // $mail->SMTPAutoTLS = false; 
+            // $mail->SMTPOptions = array(
+            //     'ssl' => array(
+            //         'verify_peer' => false,
+            //         'verify_peer_name' => false,
+            //         'allow_self_signed' => true
+            //     )
+            // );
+
+    
     
             $mail->Subject = $request->subject;
             $mail->Body    = $request->body;

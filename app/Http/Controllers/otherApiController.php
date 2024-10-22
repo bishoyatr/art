@@ -20,20 +20,24 @@ class otherApiController extends Controller
             'data'    => $data
         ];
     }   
-    public function showOtherCategories($id)
-        {
+    
+    public function getCategoriesByTypes($id){
+        $categories = OtherCategories::where('category_type',$id)->whereNull('parent_id')->get();
+        return response()->json($this->handleResponse('sucess',200,'sucess',$categories));
+    }
+
+    public function showOtherCategories($id){
         
         $categories = DB::table('other_categories')->Join('link_other_process','other_categories.id','link_other_process.parent_id')
-        ->select('other_categories.*', 'link_other_process.id as process-id', 'link_other_process.parent_id as process_parent', 'link_other_process.sub_id as process_sub', 'link_other_process.file_type')
+        ->select('other_categories.id','other_categories.name','other_categories.category_type','other_categories.parent_id','other_categories.is_active', 'link_other_process.id as process-id', 'link_other_process.parent_id as process_parent', 'link_other_process.sub_id as process_sub', 'link_other_process.file_type')
         ->where('other_categories.parent_id',$id)->get();
-
-        // $children_type = count($categories) != 0 ? $categories[0]->file_type : null;
         
         if($categories){
             return response()->json($this->handleResponse('success',200,'sucess',$categories),200);
         }
         return response()->json($this->handleResponse('success',200,'sucess',$categories),200);
     }
+
     public function showAllOldAttachments($id)
     {
         $attachments = otherOldAttachments::where('product_id',$id)->get();
@@ -41,6 +45,7 @@ class otherApiController extends Controller
         // $grand_parent = LinkOtherProcess::where('sub_id',$id)->select('parent_id')->get();
             return response()->json($this->handleResponse('sucess',200,'sucess',$attachments),200);
     }
+
     public function showAllCurrentAttachments($id)
     {
 
@@ -50,6 +55,7 @@ class otherApiController extends Controller
 
         return response()->json($this->handleResponse('sucess',200,'sucess',$productsline),200);
     }
+
     public function showSingleCurrentAttachment($id)
     {
         $history= otherCurrentAttachments::findOrfail($id);
@@ -58,11 +64,11 @@ class otherApiController extends Controller
         // $data = $history->merge($images);
         return response()->json($this->handleResponse('sucess',200,'sucess',$history),200);
     }
+
     public function showSingleOldAttachment($id)
     {
         $history= otherOldAttachments::findOrfail($id);
         $images=json_decode($history->images);
         return response()->json($this->handleResponse('sucess',200,'sucess',$history),200);
     }
-
 }

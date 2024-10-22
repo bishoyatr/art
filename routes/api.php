@@ -77,6 +77,7 @@ Route::group(['prefix'=>'login'], function ()
 
 Route::group(['prefix'=>'/2'], function ()
 {
+     Route::get('/type/{id}',[otherApiController::class,'getCategoriesByTypes']);
      Route::get('/categories/{id}', [otherApiController::class, 'showOtherCategories']);
      Route::get('/old/{id}', [otherApiController::class, 'showAllOldAttachments']);
      Route::get('/old/single/{id}', [otherApiController::class, 'showSingleCurrentAttachment']);

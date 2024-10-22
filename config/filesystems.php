@@ -43,7 +43,7 @@ return [
         ],
         'notifications' => [
             'driver' => 'local',
-            'root' => storage_path('assets/images/notifications'),
+            'root' => public_path('assets/images/notifications'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],

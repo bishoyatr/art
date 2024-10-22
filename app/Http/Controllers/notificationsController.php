@@ -28,7 +28,7 @@ class notificationsController extends Controller
         $create = notification::create([
             'name'=>$request->name,
             'description'=>$request->description,
-            'image'=>'notifications/'.$filename,
+            'image'=>'https:\/\/atr-eg.net\/assets\/images\/notifications/'.$filename,
             'created_by'=> 1
         ]);
         
